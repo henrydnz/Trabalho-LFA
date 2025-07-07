@@ -15,7 +15,7 @@ int return_target_id(state s, char read_curr){
     for(transition t : s.trans)
         if(t.read == read_curr)
             return t.target;
-    //se nao tem o caractere em nenhuma transicao entao
+    //se nao tem o caractere em nenhuma transicao
     //a palavra ja e invalida
     return -1;
 }
@@ -25,7 +25,7 @@ int valid(automata a, std::string s){
     if(s[0] == '@')
         return a[0].is_final;
 
-    state state_curr;
+    state state_curr = a[0];
     int i, target_id;
 
     //roda por cada char da string, avança pra próxima transição
@@ -37,7 +37,7 @@ int valid(automata a, std::string s){
             return false;
 
         state_curr = a[target_id];
-        print_step(state_curr, s, i);
+        print_step(state_curr, s, i+1);
     }
 
     //se rodou por toda a string entao testa se o ultimo

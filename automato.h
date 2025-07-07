@@ -13,7 +13,7 @@ typedef struct transition {
 
 typedef struct state {
     int id;
-    int is_final = 0;
+    bool is_final = false;
     std::vector<transition> trans;
 } state;
 
@@ -21,7 +21,7 @@ typedef std::vector<state> automata;
 
 int return_target_id(state s, char read_curr);
 void print_step(state state_curr, std::string s, int i);
-void step(automata a, std::string s);
+int valid(automata a, std::string s);
 
 #endif
 
