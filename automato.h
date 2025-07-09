@@ -21,7 +21,8 @@ typedef std::vector<state> automata;
 
 int return_target_id(state s, char read_curr);
 void print_step(state state_curr, std::string s, int i);
-int valid(automata a, std::string s);
+bool valid(automata a, std::string str);
+void test_word(automata a);
 
 #endif
 
