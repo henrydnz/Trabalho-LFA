@@ -2,7 +2,7 @@
 
 using namespace std;
 
-static automata a;
+static Automata a;
 
 int main(){
     a = test_automata();

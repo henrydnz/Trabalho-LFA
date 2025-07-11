@@ -3,7 +3,9 @@
 
 #include "automato.h"
 
+using namespace std;
+
 char get_non_terminal(int id);
-void print_gram(automata a);
+void print_gram(Automata a);
 
 #endif
