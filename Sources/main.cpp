@@ -1,28 +1,27 @@
 #include "utils.h"
 
 using namespace std;
-
 static Automata a;
 
 int main(){
     a = test_automata();
-    int op;
-    while(1){
+    int option;  
+    while(1){ 
         menu();
-        cin >> op;
-        switch (op){
+        cin >> option;
+        switch (option){
             case 1:
                 cout << "nao implementado\n";
                 break;
             case 2:
-                if(a.size()>0)
-                    print_gram(a);
+                if(automata.size() > 0)
+                    print_gram(automata);
                 else
                     cout << "Nenhum automato foi lido ainda";
                 break;
             case 3: 
-                if(a.size()>0)
-                    test_word(a);
+                if(automata.size()>0)
+                    test_word(automata);
                 else
                     cout << "Nenhum automato foi lido ainda";
                 break;
