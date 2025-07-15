@@ -1,4 +1,4 @@
-#include "gramatica.h"
+#include "../Headers/gramatica.h"
 
 //maps non terminal by state id
 char get_non_terminal(int id) {
@@ -7,7 +7,7 @@ char get_non_terminal(int id) {
 
 //prints automata gram 
 void print_gram(Automata automata){
-    cout << "\nGRAMATICA\n";
+    cout << "GRAMATICA\n";
     for(int i = 0; i < automata.size(); i++){
         cout << get_non_terminal(i) << " -> ";
         for(int j = 0; j < automata[i].transition.size(); ++j){
@@ -21,5 +21,4 @@ void print_gram(Automata automata){
         }
        cout << endl;
     }
-    cout << endl;
 }

@@ -27,9 +27,8 @@ void show_word(const string &word, int step){
  * @post  
  * @authors @mattheusMSL
  */
-
 void print_step(int state_id, const string &word, int step){
-    cout << "[q" << state_id << "]";
+    cout << "[q" << state_id << "] ";
     show_word(word, step);
     cout << endl;
 }
@@ -43,10 +42,10 @@ void print_step(int state_id, const string &word, int step){
 //analisa todas as transicoes de um estado, compara com caractere pra leitura. 
 //retorna o id do estado destino de acordo com o caractere lido.
 //se nao encontra uma transicao correspondente retorna -1;
-int return_target_id(State s, char read_curr){
-    for(Transition t : s.transition)
-        if(t.read == read_curr)
-            return t.target_id;
+int get_target_id(State state, char current_symbol){
+    for(Transition transition : state.transition)
+        if(transition.read == current_symbol)
+            return transition.target_id;
     return -1;
 }
 
@@ -60,18 +59,22 @@ bool valid(Automata automata, string word){
     if(word[0] == '@') {
         return automata[0].is_final;
     }
+
     State current_state = automata[0];
     int i, target_id = 0;
+
     for(i = 0; i < word.size(); i++) {
-        print_step(current_state, word, i);
-        target_id = return_target_id(current_state, word[i]);
+        print_step(target_id, word, i);
+        target_id = get_target_id(current_state, word[i]);
         if(target_id == -1) { 
             return false;
         }
         current_state = automata[target_id];    
     }
-    print_step(target_id, word, word.size());
+
+    cout << "[q" << target_id << "] @\n";
     return current_state.is_final;
+
 }
 
 /** 
@@ -80,9 +83,10 @@ bool valid(Automata automata, string word){
  * @post  
  * @authors @henrydnz @mattheusMSL
  */
-
 void test_word(Automata automata){
     string word;
+    cout << "Escreva a palavra a ser testada:\n";
     cin >> word;
-    cout << valid(automata, word) ? "ACEITO" : "REJEITADO";
+    cout << "\nLendo \'" << word << "\'\n\n";
+    cout << (valid(automata, word) ? "ACEITO\n" : "REJEITADO\n");
 }
