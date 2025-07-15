@@ -2,10 +2,11 @@
 
 using namespace std;
 
-static Automata a;
+static Automata automata;
 
 int main(){
-    // read_automata(a);
-    test_automata(a);
-    menu(a);
+    // read_automata(automata);
+    test_automata(automata);   //debugging
+    menu(automata);
 }
+

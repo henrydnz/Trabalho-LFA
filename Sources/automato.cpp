@@ -1,6 +1,6 @@
 #include "../Headers/automato.h"
 
-// primeira versão de print_step
+// primeira versão de print_step (nao recursiva)
 // void print_step(State &current_state, string word, int step){
 //     cout << "[q" << current_state.id << "]";
 //     for(int i = step; i < word.size(); i++)
@@ -14,6 +14,7 @@
  * @post  
  * @authors @mattheusMSL
  */
+
 void show_word(const string &word, int step){
     if(step < word.size()){
         cout << word[step];
@@ -27,6 +28,7 @@ void show_word(const string &word, int step){
  * @post  
  * @authors @mattheusMSL
  */
+
 void print_step(int state_id, const string &word, int step){
     cout << "[q" << state_id << "] ";
     show_word(word, step);
@@ -39,6 +41,7 @@ void print_step(int state_id, const string &word, int step){
  * @post  
  * @authors @henrydnz @mattheusMSL
  */
+
 //analisa todas as transicoes de um estado, compara com caractere pra leitura. 
 //retorna o id do estado destino de acordo com o caractere lido.
 //se nao encontra uma transicao correspondente retorna -1;
@@ -50,11 +53,14 @@ int get_target_id(State state, char current_symbol){
 }
 
 /** 
- * @brief valida uma palavra dado um automato e a string da palavra, passa por todos os caracteres da string e navega pelo automato, se o ultimo estado é final, a palavra é válida, caso contrário não.
+ * @brief 
  * @pre 
  * @post  
  * @authors @henrydnz @mattheusMSL
  */
+
+//valida uma palavra dado um automato e a string da palavra, passa por todos os caracteres da string e navega pelo automato, 
+//se o ultimo estado é final, a palavra é válida, caso contrário não.
 bool valid(Automata automata, string word){
     if(word[0] == '@') {
         return automata[0].is_final;
@@ -83,6 +89,7 @@ bool valid(Automata automata, string word){
  * @post  
  * @authors @henrydnz @mattheusMSL
  */
+
 void test_word(Automata automata){
     string word;
     cout << "Escreva a palavra a ser testada:\n";

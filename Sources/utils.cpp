@@ -50,10 +50,10 @@ void insert_transition(State &state, char read, int target_id){
    state.transition.push_back(transition);
 }
 
-/** @henrydnz vamos adicionar cometários nesse formato 
+/**
  * @brief
  * @pre
- * @post  //post siginica o pós-fixo
+ * @post
  * @authors @henrydnz
  */
 
@@ -75,12 +75,26 @@ void test_automata(Automata &a){
     a.push_back(q1);
 }
 
+/**
+ * @brief
+ * @pre
+ * @post
+ * @authors @henrydnz
+ */
+
 void print_menu(){
     clear_terminal();
     cout << "SISTEMA DE AUTOMATOS\n";
     cout << "1 - Mostrar Gramatica de Automato\n";
     cout << "2 - Testar uma Palavra\n\n";
 }
+
+/**
+ * @brief
+ * @pre
+ * @post
+ * @authors @henrydnz
+ */
 
 void menu(Automata &a){
     int option;

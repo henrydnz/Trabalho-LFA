@@ -1,11 +1,23 @@
 #include "../Headers/gramatica.h"
 
-//maps non terminal by state id
+/** 
+ * @brief
+ * @pre
+ * @post  
+ * @authors @henrydnz
+ */
+
 char get_non_terminal(int id) {
     return (id == 0) ? 'S' : 'A' + id - 1;
 }
 
-//prints automata gram 
+/** 
+ * @brief
+ * @pre
+ * @post  
+ * @authors @henrydnz
+ */
+
 void print_gram(Automata automata){
     cout << "GRAMATICA\n";
     for(int i = 0; i < automata.size(); i++){
