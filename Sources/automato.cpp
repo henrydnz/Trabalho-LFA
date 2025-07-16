@@ -13,9 +13,12 @@
  * @brief
  * @pre
  * @post  
+ * @param word
+ * @param step
  * @authors @mattheusMSL
  */
 
+//função helper recursiva pra mostrar cada letra da palavra individualmente de acordo com o passo
 void show_word(const string &word, int step){
     if(step < word.size()){
         cout << word[step];
@@ -27,11 +30,17 @@ void show_word(const string &word, int step){
  * @brief
  * @pre
  * @post  
+ * @param state_id
+ * @param word
+ * @param step
  * @authors @mattheusMSL
  */
 
+//mostra o passo atual da leitura da palavra
 void print_step(int state_id, const string &word, int step){
+    //mostra estado atual
     cout << "[q" << state_id << "] ";
+    //chama recursiva pra mostrar palavra a partir do passo dado
     show_word(word, step);
     cout << endl;
 }
@@ -40,16 +49,19 @@ void print_step(int state_id, const string &word, int step){
  * @brief
  * @pre
  * @post  
+ * @param state
+ * @param symbol
+ * @returns
  * @authors @henrydnz @mattheusMSL
  */
 
-//analisa todas as transicoes de um estado, compara com caractere pra leitura. 
-//retorna o id do estado destino de acordo com o caractere lido.
-//se nao encontra uma transicao correspondente retorna -1;
-int get_target_id(State state, char current_symbol){
+int get_target_id(State state, char symbol){
+    //analisa todas as transicoes do estado
     for(Transition transition : state.transition)
-        if(transition.read == current_symbol)
+        //se o simbolo esta numa transicao, retorna o destino. valor 0 ou mais
+        if(transition.read == symbol)
             return transition.target_id;
+    //passou por tudo e não encontrou uma transição correspondente, retorna -1
     return -1;
 }
 
@@ -57,12 +69,16 @@ int get_target_id(State state, char current_symbol){
  * @brief 
  * @pre 
  * @post  
+ * @param automata
+ * @param word
+ * @returns
  * @authors @henrydnz @mattheusMSL
  */
 
-//valida uma palavra dado um automato e a string da palavra, passa por todos os caracteres da string e navega pelo automato, 
-//se o ultimo estado é final, a palavra é válida, caso contrário não.
+
+//ve se uma palavra é valida no automato
 bool valid(Automata automata, string word){
+    //quando a palavra é vazia, se o estado inicial é final retorna true, senão false
     if(word[0] == '@') {
         return automata[0].is_final;
     }
@@ -70,16 +86,20 @@ bool valid(Automata automata, string word){
     State current_state = automata[0];
     int i, target_id = 0;
 
+    //vê simbolo por simbolo da palavra, anda pelo automato
     for(i = 0; i < word.size(); i++) {
-        print_step(target_id, word, i);
-        target_id = get_target_id(current_state, word[i]);
-        if(target_id == -1) { 
+        print_step(target_id, word, i); //mostra passo
+        target_id = get_target_id(current_state, word[i]);  //pega estado da transicao
+        //nao tem transicao pro simbolo, é invalida
+        if(target_id == -1) {   
             return false;
         }
         current_state = automata[target_id];    
     }
 
-    cout << "[q" << target_id << "] @\n";
+    cout << "[q" << target_id << "]\n";
+
+    //se quando a palavra acaba, o estado é final, retorna true, senão false
     return current_state.is_final;
 
 }
@@ -88,9 +108,11 @@ bool valid(Automata automata, string word){
  * @brief
  * @pre
  * @post  
+ * @param automata
  * @authors @henrydnz @mattheusMSL
  */
 
+//pede a palavra, mostra result
 void test_word(Automata automata){
     string word;
     cout << "Escreva a palavra a ser testada:\n";

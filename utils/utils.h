@@ -8,8 +8,8 @@ using namespace std;
 #include "../Headers/gramatica.h"
 
 void insert_transition(State &state, char read, int target_id);
-void test_automata(Automata &a);
-void menu(Automata &a);
+void test_automata(Automata &automata);
+void menu(Automata &automata);
 void print_menu();
 void press_enter();
 void clear_terminal();

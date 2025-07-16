@@ -5,7 +5,7 @@
 
 using namespace std;
 
-char get_non_terminal(int id);
-void print_gram(Automata a);
+char get_non_terminal(int state_id);
+void print_gram(Automata automata);
 
 #endif
