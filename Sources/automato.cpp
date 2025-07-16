@@ -1,4 +1,5 @@
 #include "../Headers/automato.h"
+#include "../utils/utils.h"
 
 // primeira versão de print_step (nao recursiva)
 // void print_step(State &current_state, string word, int step){
@@ -94,6 +95,7 @@ void test_word(Automata automata){
     string word;
     cout << "Escreva a palavra a ser testada:\n";
     cin >> word;
+    clear_buffer();
     cout << "\nLendo \'" << word << "\'\n\n";
     cout << (valid(automata, word) ? "ACEITO\n" : "REJEITADO\n");
 }

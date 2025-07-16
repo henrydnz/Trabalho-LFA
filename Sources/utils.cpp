@@ -109,13 +109,12 @@ void menu(Automata &a){
                 break;
             case 2: 
                 test_word(a);
-                clear_buffer();
                 break;
             default:
                 cout << "opção inválida!\n";
-                clear_buffer();
                 continue;
         }
         press_enter();
     }
 }
+
