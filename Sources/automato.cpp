@@ -1,14 +1,6 @@
 #include "../Headers/automato.h"
 #include "../utils/utils.h"
 
-// primeira versão de print_step (nao recursiva)
-// void print_step(State &current_state, string word, int step){
-//     cout << "[q" << current_state.id << "]";
-//     for(int i = step; i < word.size(); i++)
-//         cout << word[i];
-//      cout << endl;
-// }
-
 /** 
  * @brief
  * @pre

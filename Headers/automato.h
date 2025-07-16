@@ -26,7 +26,6 @@ typedef vector<State> Automata;
 int get_target_id(State state, char symbol);
 void show_word(const string &word, int step);
 void print_step(int state_id, const string &word, int step);
-// void print_step(State state_curr, string s, int i);
 bool valid(Automata automata, string word);
 void test_word(Automata automata);
 
