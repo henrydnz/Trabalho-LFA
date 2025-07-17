@@ -10,8 +10,8 @@
 
 //retorna a letra do não terminal correspondente ao estado
 char get_non_terminal(int state_id) {
-    string non_terminals = "SABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    return non_terminals[state_id%27];
+    if(state_id == 0) return 'S';
+    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[(state_id-1)%26];
 }
 
 /** 
