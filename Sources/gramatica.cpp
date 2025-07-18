@@ -40,7 +40,11 @@ void print_gram(Automata automata){
         }
         //se é final, aceita vazio
         if(automata[i].is_final){
-            cout << " | @";
+            //vazio nao eh a unica transicao, adiciona ' | ' pra separar
+            if(automata[i].transition.size() > 0){
+                cout << " | ";
+            }
+            cout << "@";
         }
        cout << endl;
     }

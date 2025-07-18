@@ -38,45 +38,6 @@ void press_enter() {
     clear_buffer();
 }
 
-/** 
- * @brief
- * @pre
- * @post  
- * @param state
- * @param read
- * @param target_id
- * @authors @henrydnz
- */
-
-//ajuda a adicionar transicoes num estado
-void insert_transition(State &state, char read, int target_id){
-    //cria transicao e atualiza valores
-    Transition transition;
-    transition.read = read;
-    transition.target_id = target_id;
-    //insere trasnsicao no estado passado por referencia 
-    state.transition.push_back(transition);
-}
-
-//funcao que cria um automato pra debugar, provavelmente vai ser excluido dps
-void test_automata(Automata &automata){
-    State q0, q1;
-
-    //(q0, 'a') = q0  /  (q0, 'b') = q1
-    insert_transition(q0, 'a', 0);
-    insert_transition(q0, 'b', 1);
-
-    //(q1, 'a') = q0  /  (q1, 'b') = q1
-    insert_transition(q1, 'a', 0);
-    insert_transition(q1, 'b', 1);
-
-    q0.is_final = true;
-    q1.is_final = true;
-
-    automata.push_back(q0);
-    automata.push_back(q1);
-}
-
 /**
  * @brief
  * @pre
