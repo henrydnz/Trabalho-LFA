@@ -28,7 +28,7 @@ struct State {
 typedef vector<State> Automata;
 
 int get_target_id(State state, char symbol);
-void read_file(const string &file);
+void read_afd_file(string &file, Automata &automata);
 void show_word(const string &word, int step);
 void print_step(int state_id, const string &word, int step);
 bool valid(Automata automata, string word);
