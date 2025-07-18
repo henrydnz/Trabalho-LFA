@@ -42,8 +42,7 @@ void print_step(int state_id, const string &word, int step){
  * @brief
  * @pre
  * @post  
- * @param state
- * @param symbol
+ * @param state, symbol
  * @returns
  * @authors @henrydnz @mattheusMSL
  */
@@ -59,22 +58,21 @@ int get_target_id(State state, char symbol){
 }
 
 /** 
- * @brief abre um arquivo 
- * @pre
+ * @brief função de abrir arquivos e separar as funções entre alphabeto, estados e finais 
+ * @pre passar uma string, o arquivo no caso
  * @post  
  * @param 
- * @param 
- * @returns 
+ * @returns nada
  * @authors  @mattheusMSL
  */
 
 void read_afd_file(const string &file){
     Automata automata;
     map<string, int> nameForId; // I dont know
-     ifstream read_file(file);
-     if(!read_file.is_open()){
-       cout << "Erro: em abrir o arquivo: " << file << endl;
-       exit(1);
+    ifstream read_file(file);
+    if(!read_file.is_open()){
+      cout << "Erro: em abrir o arquivo: " << file << endl;
+      exit(1);
     }
     string line; // linha que lê o arquivo por linha 
     vector<string> estados_nomeados; // vetor de string 
@@ -84,7 +82,7 @@ void read_afd_file(const string &file){
        if(line.find("alfabeto") == 0){
          continue;
        }
-       if(line.find("estados")){
+       if(line.find("estados") == 0){
           size_t initial = line.find("{"), final = line.find("}"); // acha os { } dentro dos estados para diferenciar quais do que são conteudos dos estados
           string state_content = line.substr(initial + 1, final - initial - 1); // coloca em uma sub string os conteudos dos estados, avançando uma casa no inicial e pegando o final menos o estados inicial e menos um para pegar o conteudo do estado 
           stringstream string_content(state_content);
@@ -96,7 +94,7 @@ void read_afd_file(const string &file){
                 automata.push_back(State());
             }
        }
-       if(line.find("finais")){
+        if(line.find("finais") == 0){
         size_t inicial = line.find("{"), final = line.find("}"); // acha os { } dentro dos estados finais 
         string state_final_content = line.substr(inicial + 1, final - inicial - 1); 
         stringstream string_content(state_final_content);
@@ -106,17 +104,14 @@ void read_afd_file(const string &file){
          }
        }
         if (!line.empty()) {
-            // padrão: (q0,a)= q1
-            regex r(R"(\((q\d+),([a-z0-9@])\)= (q\d+))");
+            regex r(R"(\((q\d+),([a-z0-9@])\)= (q\d+))"); // padroninza o código e e le "q\número, e alphabeto = q\número"
             smatch match;
             if (regex_match(line, match, r)) {
                 string origem = match[1];
                 char symbol = match[2].str()[0];
                 string destiny = match[3];
-
                 int origin_id = nameForId[origem];
                 int destiny_id = nameForId[destiny];
-
                 automata[origin_id].transition.push_back({symbol,destiny_id});
             }
         }
