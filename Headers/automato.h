@@ -3,8 +3,12 @@
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <utility>
+#include <regex>
+#include <map>
+#include <set>
 #include <string>
 
 using namespace std;
@@ -24,6 +28,7 @@ struct State {
 typedef vector<State> Automata;
 
 int get_target_id(State state, char symbol);
+void read_file(const string &file);
 void show_word(const string &word, int step);
 void print_step(int state_id, const string &word, int step);
 bool valid(Automata automata, string word);

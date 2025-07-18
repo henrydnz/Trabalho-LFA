@@ -1,6 +1,7 @@
 #include "../Headers/automato.h"
 #include "../utils/utils.h"
 
+
 /** 
  * @brief
  * @pre
@@ -56,6 +57,77 @@ int get_target_id(State state, char symbol){
     //passou por tudo e não encontrou uma transição correspondente, retorna -1
     return -1;
 }
+
+/** 
+ * @brief abre um arquivo 
+ * @pre
+ * @post  
+ * @param 
+ * @param 
+ * @returns 
+ * @authors  @mattheusMSL
+ */
+
+void read_afd_file(const string &file){
+    Automata automata;
+    map<string, int> nameForId; // I dont know
+     ifstream read_file(file);
+     if(!read_file.is_open()){
+       cout << "Erro: em abrir o arquivo: " << file << endl;
+       exit(1);
+    }
+    string line; // linha que lê o arquivo por linha 
+    vector<string> estados_nomeados; // vetor de string 
+    set<string> finals; // guarda todos os estados que são identificados como finais 
+
+    while(getline(read_file, line)){
+       if(line.find("alfabeto") == 0){
+         continue;
+       }
+       if(line.find("estados")){
+          size_t initial = line.find("{"), final = line.find("}"); // acha os { } dentro dos estados para diferenciar quais do que são conteudos dos estados
+          string state_content = line.substr(initial + 1, final - initial - 1); // coloca em uma sub string os conteudos dos estados, avançando uma casa no inicial e pegando o final menos o estados inicial e menos um para pegar o conteudo do estado 
+          stringstream string_content(state_content);
+          string state;
+          int id = 0;
+            while (getline(string_content, state, ',')) {
+                nameForId[state] = id++;
+                estados_nomeados.push_back(state);
+                automata.push_back(State());
+            }
+       }
+       if(line.find("finais")){
+        size_t inicial = line.find("{"), final = line.find("}"); // acha os { } dentro dos estados finais 
+        string state_final_content = line.substr(inicial + 1, final - inicial - 1); 
+        stringstream string_content(state_final_content);
+        string state;
+        while (getline(string_content, state, ',')) {
+            finals.insert(state);
+         }
+       }
+        if (!line.empty()) {
+            // padrão: (q0,a)= q1
+            regex r(R"(\((q\d+),([a-z0-9@])\)= (q\d+))");
+            smatch match;
+            if (regex_match(line, match, r)) {
+                string origem = match[1];
+                char symbol = match[2].str()[0];
+                string destiny = match[3];
+
+                int origin_id = nameForId[origem];
+                int destiny_id = nameForId[destiny];
+
+                automata[origin_id].transition.push_back({symbol,destiny_id});
+            }
+        }
+    } 
+    for (const string &state : finals) {
+        int id = nameForId[state];
+        automata[id].is_final = true;
+    }
+     read_file.close();
+}
+   
 
 /** 
  * @brief 

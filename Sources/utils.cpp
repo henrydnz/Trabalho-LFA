@@ -1,7 +1,6 @@
 #include "../utils/utils.h"
 #include <limits>
 
-
 /** 
  * @brief
  * @pre
