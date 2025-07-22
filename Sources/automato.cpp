@@ -1,13 +1,12 @@
 #include "../Headers/automato.h"
 #include "../utils/utils.h"
 
-
 /** 
- * @brief
- * @pre
- * @post  
- * @param word
- * @param step
+ * @brief cria e adiciona manualmente dois estados com transições para testes
+ * @pre o vetor 'automata' deve estar disponivel e ser passado por referência
+ * @post o automato conterá dois estados com transições deterministicas
+ * @param word palavra a ser testada
+ * @param step passo atual da leitura da palavra
  * @authors @mattheusMSL
  */
 
@@ -20,12 +19,12 @@ void show_word(const string &word, int step){
 }
 
 /** 
- * @brief
- * @pre
- * @post  
- * @param state_id
- * @param word
- * @param step
+ * @brief mostra o passo atual da leitura da palavra
+ * @pre o 'state_id' deve ser um valor válido dentro do intervalo de estados
+ * @post exibe o estado atual e a palavra a partir do passo dado
+ * @param state_id ID do estado atual
+ * @param word palavra a ser testada
+ * @param step passo atual da leitura da palavra
  * @authors @mattheusMSL
  */
 
@@ -39,11 +38,11 @@ void print_step(int state_id, const string &word, int step){
 }
 
 /** 
- * @brief
- * @pre
- * @post  
- * @param state, symbol
- * @returns
+ * @brief retorna o ID do estado de destino de uma transição
+ * @pre o estado deve conter transições válidas
+ * @post retorna o ID do estado de destino se a transição existir, ou -1 se não existir
+ * @param state estado do automato onde a transição será verificada
+ * @param symbol símbolo lido pela transição
  * @authors @henrydnz @mattheusMSL
  */
 
@@ -58,11 +57,10 @@ int get_target_id(State state, char symbol){
 }
 
 /** 
- * @brief função de abrir arquivos e separar as funções entre alphabeto, estados e finais 
- * @pre passar uma string, o arquivo no caso
- * @post  
- * @param 
- * @returns nada
+ * @brief lê um arquivo de automato e preenche o vetor de estados 
+ * @pre o arquivo deve estar no formato correto e acessível
+ * @post o vetor de estados 'automata' é preenchido com os estados e transições do automato
+ * @param file caminho do arquivo a ser lido
  * @authors  @mattheusMSL
  */
 
@@ -123,17 +121,15 @@ void read_afd_file(const string &file){
      read_file.close();
 }
    
-
 /** 
- * @brief 
- * @pre 
- * @post  
- * @param automata
- * @param word
- * @returns
+ * @brief verifica se uma palavra é válida no automato
+ * @pre o automata deve estar inicializado e conter estados válidos
+ * @post retorna true se a palavra é aceita pelo automato, false caso contrário
+ * @param automata vetor de estados que representa o automato
+ * @param word palavra a ser testada
+ * @returns retorna verdadeiro se a palavra for aceite ou falso se não for aceita 
  * @authors @henrydnz @mattheusMSL
  */
-
 
 //ve se uma palavra é valida no automato
 bool valid(Automata automata, string word){
@@ -164,10 +160,10 @@ bool valid(Automata automata, string word){
 }
 
 /** 
- * @brief
- * @pre
- * @post  
- * @param automata
+ * @brief pede a palavra e mostra o resultado da validação
+ * @pre o 'automata' deve estar inicializado e conter estados válidos
+ * @post exibe a palavra lida, e mostra se ela é aceita ou rejeitada pelo automato
+ * @param automata vetor de estados que representa o automato
  * @authors @henrydnz @mattheusMSL
  */
 
