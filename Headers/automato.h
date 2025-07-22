@@ -46,7 +46,7 @@ int get_target_id(State state, char symbol);
  * @authors  @mattheusMSL
  */
 
-void read_file(const string &file);
+void read_afd_file(string &file, Automata &automata);
 
  /** 
  * @brief cria e adiciona manualmente dois estados com transições para testes

@@ -38,52 +38,6 @@ void press_enter() {
     clear_buffer();
 }
 
-/** 
- * @brief insere uma nova transição de um estado do automato
- * @pre o estado fornecido deve ser valido e passado por referência
- * @post a nova transição é adicionada ao vetor de transições do estado
- * @param state estado do automato onde a transição será inserida
- * @param read simbolo lido pela transição
- * @param target_id ID do estado de destino da transição
- * @authors @henrydnz
- */
-
-//ajuda a adicionar transicoes num estado
-void insert_transition(State &state, char read, int target_id){
-    //cria transicao e atualiza valores
-    Transition transition;
-    transition.read = read;
-    transition.target_id = target_id;
-    //insere trasnsicao no estado passado por referencia 
-    state.transition.push_back(transition);
-}
-
-/**
- * @brief cria e adiciona manualmente dois estados com transições para testes
- * @pre o vetor 'automata' deve estar disponivel e ser passado por referência
- * @post o automato conterá dois estados com transições deterministicas
- * @param automata vetor de estados que representa o automato
- */
-
-//funcao que cria um automato pra debugar, provavelmente vai ser excluido dps
-void test_automata(Automata &automata){
-    State q0, q1;
-
-    //(q0, 'a') = q0  /  (q0, 'b') = q1
-    insert_transition(q0, 'a', 0);
-    insert_transition(q0, 'b', 1);
-
-    //(q1, 'a') = q0  /  (q1, 'b') = q1
-    insert_transition(q1, 'a', 0);
-    insert_transition(q1, 'b', 1);
-
-    q0.is_final = true;
-    q1.is_final = true;
-
-    automata.push_back(q0);
-    automata.push_back(q1);
-}
-
 /**
  * @brief mostra o menu principal do sistema de automatos
  * @pre nenhuma pré condição específica

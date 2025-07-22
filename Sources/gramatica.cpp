@@ -11,7 +11,7 @@
 //retorna a letra do não terminal correspondente ao estado
 char get_non_terminal(int state_id) {
     if(state_id == 0) return 'S';
-    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[(state_id-1)%26];
+    return "ABCDEFGHIJKLMNOPQRTUVWXYZ"[(state_id-1)%26];
 }
 
 /** 
@@ -40,7 +40,11 @@ void print_gram(Automata automata){
         }
         //se é final, aceita vazio
         if(automata[i].is_final){
-            cout << " | @";
+            //vazio nao eh a unica transicao, adiciona ' | ' pra separar
+            if(automata[i].transition.size() > 0){
+                cout << " | ";
+            }
+            cout << "@";
         }
        cout << endl;
     }
